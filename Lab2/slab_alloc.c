@@ -112,10 +112,10 @@ static unsigned sc_index(size_t size) {
     if (size <= sc_sizes[N_DIRECT - 1])
         return (unsigned)((size + ALIGN_SIZE - 1) / ALIGN_SIZE) - 1;
 
-    if (size > sc_sizes[NUM_SC - 1]) return NUM_SC; /* занадто великий */
+    if (size > sc_sizes[NUM_SC - 1]) return NUM_SC;
 
-    size_t sizen     = sc_sizes[N_DIRECT - 1];               /* 128 */
-    size_t step_base = (size_t)M_PER_GROUP * ALIGN_SIZE * 2; /* 128 */
+    size_t sizen     = sc_sizes[N_DIRECT - 1];
+    size_t step_base = (size_t)M_PER_GROUP * ALIGN_SIZE * 2;
 
     /* lhs = floor((size – sizen – 1) / step_base) + 1 */
     size_t lhs = (size - sizen - 1) / step_base + 1;
@@ -339,7 +339,7 @@ typedef struct extent_hdr {
 /* ================================================================
  *                            Slab header                          
  *
- * Зберігається на початку slab-extent (завжди вирівняна на сторінку).
+ * Зберігається на початку slab-extent (вирівняний на сторінку).
  * Далі у тій самій пам'яті йде бітова карта, потім - об'єкти.
  *
  * [slab_hdr_t | bitmap uint64_t[] | padding | obj0 | obj1 | ...]
